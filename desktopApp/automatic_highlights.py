@@ -5,6 +5,7 @@
 # importing only those functions
 # which are needed
 import tkinter as tk
+from tkinter import ttk
 from time import strftime
 import os
 from pymediainfo import MediaInfo
@@ -76,7 +77,9 @@ def automatic_highlights():
     else:
         print(_video)
         btn2.config(text = "Creating automatic highlights...")
+        pb.start()
         get_automatic_highlights(_video)
+        pb.stop()
 
 # Video Details Labels -----------------------------------------------------------------------------------------------
 
@@ -94,10 +97,19 @@ la.pack()
 btn = tk.Button(root, text ='Open', command = lambda:open_file())
 btn.pack(side = tk.TOP, pady = 10)
 
-btn2 = tk.Button(root, text ='Get my automatic highlights!', command = start_automatic_highlights) # BEFORE
-# btn2 = tk.Button(root, text ='Get my automatic highlights!', command = threading.Thread(target=automatic_highlights).start()) # AFTER
+btn2 = tk.Button(root, text ='Get my automatic highlights!', command = start_automatic_highlights) 
+
 btn2.pack(side = tk.TOP, pady = 40)
 
+# progressbar
+pb = ttk.Progressbar(
+    root,
+    orient='horizontal',
+    mode='indeterminate',
+    length=280
+)
+
+pb.place(x=250, y=250, width=350)
 
 # Display Menu
 root.config(menu = menubar)
