@@ -13,6 +13,7 @@ from automatic_highlights_module import get_automatic_highlights
 # importing askopenfile function
 # from class filedialog
 from tkinter.filedialog import askopenfile
+import threading
 
 _video = None
 
@@ -66,6 +67,8 @@ def see_properties(file):
     print(filedata)
 
 # --------------------------------------------------------------------------------------------------------------------
+def start_automatic_highlights():
+    threading.Thread(target=automatic_highlights).start()
 
 def automatic_highlights():
     if _video is None:
@@ -91,7 +94,8 @@ la.pack()
 btn = tk.Button(root, text ='Open', command = lambda:open_file())
 btn.pack(side = tk.TOP, pady = 10)
 
-btn2 = tk.Button(root, text ='Get my automatic highlights!', command = lambda:automatic_highlights())
+btn2 = tk.Button(root, text ='Get my automatic highlights!', command = start_automatic_highlights) # BEFORE
+# btn2 = tk.Button(root, text ='Get my automatic highlights!', command = threading.Thread(target=automatic_highlights).start()) # AFTER
 btn2.pack(side = tk.TOP, pady = 40)
 
 
