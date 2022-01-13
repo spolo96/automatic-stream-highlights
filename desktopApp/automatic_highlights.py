@@ -80,6 +80,7 @@ def automatic_highlights():
         pb.start()
         get_automatic_highlights(_video)
         pb.stop()
+        btn2.config(text = "Highlight Created! Open another video to create another highlight!")
 
 # Video Details Labels -----------------------------------------------------------------------------------------------
 
